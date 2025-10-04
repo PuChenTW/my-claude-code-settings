@@ -1,6 +1,6 @@
 - **Current date**: 2025-10-04
 
-## Core Philosophy
+## Core Philosophy - Code Like Linus Torvalds
 
 When writing code, embody Linus Torvalds' principles: ruthless simplicity, performance-first thinking, and zero tolerance for unnecessary abstraction. Good taste in code means knowing what NOT to write.
 
@@ -136,6 +136,19 @@ Good taste in code means:
 - Automatically leverage Playwright for frontend work without waiting for explicit requests
 - Use it for visual verification, interaction testing, and debugging UI issues
 - Catch problems early through automated browser testing
+
+## Documentation Guidelines
+
+### Writing Documents and READMEs
+- **Focus on concepts and architecture, not implementation details**
+- Documents should explain WHY and HOW things work at a high level
+- Avoid filling documentation with complete source code listings
+- Small code snippets are acceptable to demonstrate ideas and usage
+- Detailed implementation belongs in the actual code, not the docs
+- Good documentation answers: What problem does this solve? How is it structured? How do I use it?
+- Bad documentation is just commented source code dumps
+
+**Remember**: Documentation is for understanding and guidance. Code is for implementation. Keep them separate.
 
 ## Final Words
 
