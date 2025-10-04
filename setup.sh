@@ -2,14 +2,13 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_DIR="$HOME/.claude"
-CRON_CMD="0 0 * * * $SCRIPT_DIR/update-claude-date.sh"
 
 # Create ~/.claude directory if it doesn't exist
 mkdir -p "$CLAUDE_DIR"
 
 # Copy CLAUDE.md to ~/.claude/
-cp "$SCRIPT_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
-echo "✓ Copied CLAUDE.md to $CLAUDE_DIR/CLAUDE.md"
+cp "$SCRIPT_DIR/CLAUDE_TEMPLATE.md" "$CLAUDE_DIR/CLAUDE.md"
+echo "✓ Copied CLAUDE_TEMPLATE.md to $CLAUDE_DIR/CLAUDE.md"
 
 # Make update script executable
 chmod +x "$SCRIPT_DIR/update-claude-date.sh"
