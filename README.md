@@ -10,12 +10,12 @@ Global configuration for Claude Code that enforces Linus Torvalds-style coding p
 ./setup.sh
 ```
 
-This installs `CLAUDE.md` to `~/.claude/` and sets up a daily cron job to keep the date current.
+This installs `CLAUDE.md` to `~/.claude/` and sets up a SessionStart hook to keep the date current.
 
 ## What It Does
 
 - Copies coding guidelines to `~/.claude/CLAUDE.md`
-- Sets up automatic date updates via cron
+- Configures SessionStart hook to update date on every session
 - Enforces simplicity-first principles across all projects
 
 ## Hooks

@@ -10,12 +10,12 @@ Claude Code 的全域配置，強制執行 Linus Torvalds 風格的程式設計�
 ./setup.sh
 ```
 
-這會將 `CLAUDE.md` 安裝到 `~/.claude/` 並設定每日 cron 排程來保持日期更新。
+這會將 `CLAUDE.md` 安裝到 `~/.claude/` 並設定 SessionStart hook 來保持日期更新。
 
 ## 功能
 
 - 複製程式設計指南到 `~/.claude/CLAUDE.md`
-- 透過 cron 設定自動日期更新
+- 設定 SessionStart hook 在每次對話開始時更新日期
 - 在所有專案中強制執行簡潔優先原則
 
 ## Hooks

@@ -19,9 +19,41 @@ echo "✓ Made update-claude-date.sh executable"
 "$SCRIPT_DIR/update-claude-date.sh"
 echo "✓ Updated date in CLAUDE.md"
 
-# Add cron job if it doesn't already exist
-(crontab -l 2>/dev/null | grep -v "update-claude-date.sh"; echo "$CRON_CMD") | crontab -
-echo "✓ Added cron job to run daily at 0:00"
+# Setup SessionStart hook in ~/.claude/settings.json
+SETTINGS_FILE="$CLAUDE_DIR/settings.json"
+HOOK_CONFIG=$(cat <<'EOF'
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$SCRIPT_DIR/update-claude-date.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+EOF
+)
+
+# Replace $SCRIPT_DIR with actual path in hook config
+HOOK_CONFIG=$(echo "$HOOK_CONFIG" | sed "s|\$SCRIPT_DIR|$SCRIPT_DIR|g")
+
+if [ ! -f "$SETTINGS_FILE" ]; then
+  # Create new settings.json
+  echo "$HOOK_CONFIG" | jq '.' > "$SETTINGS_FILE"
+  echo "✓ Created settings.json with SessionStart hook"
+else
+  # Merge hook into existing settings.json
+  TEMP_FILE=$(mktemp)
+  jq -s '.[0] * .[1]' "$SETTINGS_FILE" <(echo "$HOOK_CONFIG") > "$TEMP_FILE"
+  mv "$TEMP_FILE" "$SETTINGS_FILE"
+  echo "✓ Updated settings.json with SessionStart hook"
+fi
 
 echo ""
 echo "Setup complete!"
