@@ -50,10 +50,17 @@ Claude Code 的全域配置，強制執行 Linus Torvalds 風格的程式設計�
   - 忽略未使用的 import (F401)，因為 Claude 會在實作前先加入 import
   - 顯示錯誤但不阻擋執行（讓 Claude 看到並修正問題）
 
+- **format-shellscript.sh**：使用 shellcheck 和 shfmt 檢查並格式化 shell 腳本
+  - 在 Write/Edit/MultiEdit 操作時執行
+  - 使用 shellcheck 檢查並用 shfmt 格式化（2 空格縮排，bash 風格）
+  - 顯示錯誤但不阻擋執行（讓 Claude 看到並修正問題）
+
 ### 需求
 
 - jq：`brew install jq`（macOS）或 `apt install jq`（Linux）
 - uvx（來自 uv）：https://docs.astral.sh/uv/getting-started/installation/
+- shellcheck：`brew install shellcheck`（macOS）或 `apt install shellcheck`（Linux）
+- shfmt：`brew install shfmt`（macOS）或 `go install mvdan.cc/sh/v3/cmd/shfmt@latest`（Linux）
 
 ## MCP 伺服器
 

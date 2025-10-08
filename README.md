@@ -50,10 +50,17 @@ Installs:
   - Ignores unused imports (F401) since Claude adds imports before implementation
   - Shows errors without blocking (lets Claude see and fix issues)
 
+- **format-shellscript.sh**: Lints and formats shell scripts using shellcheck and shfmt
+  - Runs on Write/Edit/MultiEdit operations
+  - Lints with shellcheck and formats with shfmt (2-space indent, bash style)
+  - Shows errors without blocking (lets Claude see and fix issues)
+
 ### Requirements
 
 - jq: `brew install jq` (macOS) or `apt install jq` (Linux)
 - uvx (from uv): https://docs.astral.sh/uv/getting-started/installation/
+- shellcheck: `brew install shellcheck` (macOS) or `apt install shellcheck` (Linux)
+- shfmt: `brew install shfmt` (macOS) or `go install mvdan.cc/sh/v3/cmd/shfmt@latest` (Linux)
 
 ## MCP Servers
 
