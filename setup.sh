@@ -33,13 +33,18 @@ fi
 chmod +x "$SCRIPT_DIR/update-claude-date.sh"
 echo "✓ Made update-claude-date.sh executable"
 
+# Copy script to permanent location
+cp "$SCRIPT_DIR/update-claude-date.sh" "$CLAUDE_DIR/"
+chmod +x "$CLAUDE_DIR/update-claude-date.sh"
+echo "✓ Copied update-claude-date.sh to $CLAUDE_DIR"
+
 # Run update script to set current date
 "$SCRIPT_DIR/update-claude-date.sh"
 echo "✓ Updated date in CLAUDE.md"
 
 # Setup SessionStart hook in ~/.claude/settings.json
 SETTINGS_FILE="$CLAUDE_DIR/settings.json"
-HOOK_COMMAND="$SCRIPT_DIR/update-claude-date.sh"
+HOOK_COMMAND="$CLAUDE_DIR/update-claude-date.sh"
 
 if [ ! -f "$SETTINGS_FILE" ]; then
   # Create new settings.json with SessionStart hook
