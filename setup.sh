@@ -104,5 +104,40 @@ if ! jq empty "$SETTINGS_FILE" 2>/dev/null; then
   exit 1
 fi
 
+# Setup MCP servers
+echo ""
+echo "Setting up MCP servers..."
+
+# Install Playwright MCP
+echo "Installing Playwright MCP server..."
+if claude mcp add -s user playwright -- npx -y @playwright/mcp@latest; then
+  echo "✓ Installed Playwright MCP server"
+else
+  echo "✗ Failed to install Playwright MCP server"
+fi
+
+# Install Context7 MCP (with API key prompt)
+echo ""
+echo "Context7 MCP provides up-to-date library documentation."
+echo "Get your API key at: https://context7.com/dashboard"
+read -p "Enter Context7 API key (or press Enter to skip): " CONTEXT7_API_KEY
+
+if [ -n "$CONTEXT7_API_KEY" ]; then
+  echo "Installing Context7 MCP server..."
+  if claude mcp add -s user context7 -- npx -y @upstash/context7-mcp --api-key "$CONTEXT7_API_KEY"; then
+    echo "✓ Installed Context7 MCP server"
+  else
+    echo "✗ Failed to install Context7 MCP server"
+  fi
+else
+  echo "⊘ Skipped Context7 installation"
+  echo "  To install later: claude mcp add -s user context7 -- npx -y @upstash/context7-mcp --api-key YOUR_API_KEY"
+fi
+
+# List installed MCP servers
+echo ""
+echo "Installed MCP servers:"
+claude mcp list
+
 echo ""
 echo "Setup complete!"
