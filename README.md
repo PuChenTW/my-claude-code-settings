@@ -20,6 +20,14 @@ This installs `CLAUDE.md` to `~/.claude/`, sets up a SessionStart hook to keep t
 - Optionally installs Context7 MCP server for up-to-date library documentation (requires API key)
 - Enforces simplicity-first principles across all projects
 
+## Customization
+
+You can modify `CLAUDE_TEMPLATE.md` to use your own coding guidelines and principles instead of the default Linus Torvalds-style rules.
+
+**IMPORTANT**: The first line must remain `- **Current date**: YYYY-MM-DD` for the SessionStart hook to update the date automatically. Add your custom content starting from line 2.
+
+After modifying `CLAUDE_TEMPLATE.md`, run `./setup.sh` again to apply your changes.
+
 ## Hooks
 
 Auto-formatting hooks that run when Claude Code writes or edits files.

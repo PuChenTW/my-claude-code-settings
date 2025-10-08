@@ -20,6 +20,14 @@ Claude Code 的全域配置，強制執行 Linus Torvalds 風格的程式設計�
 - 選擇性安裝 Context7 MCP 伺服器以取得最新的函式庫文件（需要 API 金鑰）
 - 在所有專案中強制執行簡潔優先原則
 
+## 客製化
+
+您可以修改 `CLAUDE_TEMPLATE.md` 來使用自己的程式設計指南和原則，而非預設的 Linus Torvalds 風格規則。
+
+**重要**：第一行必須保持 `- **Current date**: YYYY-MM-DD` 格式，以便 SessionStart hook 自動更新日期。請從第二行開始加入您的客製化內容。
+
+修改 `CLAUDE_TEMPLATE.md` 後，再次執行 `./setup.sh` 來套用變更。
+
 ## Hooks
 
 當 Claude Code 寫入或編輯檔案時自動執行的格式化 hooks。
