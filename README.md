@@ -75,6 +75,34 @@ The setup script installs the following MCP servers:
 
 To list installed MCP servers: `claude mcp list`
 
+## Development
+
+### Shell Script Quality
+
+Makefile targets for linting and formatting shell scripts:
+
+```bash
+make lint-sh      # Run shellcheck on all .sh files
+make format-sh    # Format with shfmt (2-space indent, bash style)
+make check-sh     # Run both lint and format
+```
+
+### Pre-commit Hooks
+
+Install pre-commit hooks to automatically check shell scripts before commits:
+
+```bash
+make install-hooks
+```
+
+This runs shellcheck and shfmt on staged .sh files. Commits are blocked if linting fails.
+
+### Requirements
+
+- shellcheck: `brew install shellcheck` (macOS) or `apt install shellcheck` (Linux)
+- shfmt: `brew install shfmt` (macOS) or `go install mvdan.cc/sh/v3/cmd/shfmt@latest` (Linux)
+- pre-commit: `brew install pre-commit` (macOS) or `pip install pre-commit` (Linux)
+
 ## Philosophy
 
 Good code is simple code. Complex solutions indicate poor understanding. Every line is a liability—delete aggressively.
