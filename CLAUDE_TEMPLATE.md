@@ -139,7 +139,7 @@ Good taste in code means:
 
 ## Documentation Guidelines
 
-### Writing Documents and READMEs
+### Writing Documents and READMEs (or CLAUDE.md)
 - **Focus on concepts and architecture, not implementation details**
 - Documents should explain WHY and HOW things work at a high level
 - Avoid filling documentation with complete source code listings
