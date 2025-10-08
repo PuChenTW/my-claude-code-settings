@@ -10,12 +10,14 @@ Claude Code 的全域配置，強制執行 Linus Torvalds 風格的程式設計�
 ./setup.sh
 ```
 
-這會將 `CLAUDE.md` 安裝到 `~/.claude/` 並設定 SessionStart hook 來保持日期更新。
+這會將 `CLAUDE.md` 安裝到 `~/.claude/`、設定 SessionStart hook 來保持日期更新，並安裝 MCP 伺服器。
 
 ## 功能
 
 - 複製程式設計指南到 `~/.claude/CLAUDE.md`
 - 設定 SessionStart hook 在每次對話開始時更新日期
+- 安裝 Playwright MCP 伺服器以進行網頁自動化
+- 選擇性安裝 Context7 MCP 伺服器以取得最新的函式庫文件（需要 API 金鑰）
 - 在所有專案中強制執行簡潔優先原則
 
 ## Hooks
@@ -44,6 +46,26 @@ Claude Code 的全域配置，強制執行 Linus Torvalds 風格的程式設計�
 
 - jq：`brew install jq`（macOS）或 `apt install jq`（Linux）
 - uvx（來自 uv）：https://docs.astral.sh/uv/getting-started/installation/
+
+## MCP 伺服器
+
+安裝腳本會安裝以下 MCP 伺服器：
+
+### Playwright MCP
+- 安裝時**自動安裝**
+- 啟用網頁開發和測試的瀏覽器自動化功能
+- 不需要額外設定
+
+### Context7 MCP
+- **選擇性** - 安裝時會提示輸入 API 金鑰
+- 提供最新的、版本特定的函式庫文件
+- 在此取得 API 金鑰：https://context7.com/dashboard
+- 如果安裝時跳過，稍後可使用以下指令安裝：
+  ```bash
+  claude mcp add -s user context7 -- npx -y @upstash/context7-mcp --api-key YOUR_API_KEY
+  ```
+
+列出已安裝的 MCP 伺服器：`claude mcp list`
 
 ## 理念
 
