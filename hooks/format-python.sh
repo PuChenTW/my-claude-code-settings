@@ -11,24 +11,24 @@ project_path="${CLAUDE_PROJECT_DIR:-$(pwd)}"
 
 # Exit silently if no file path - hook may be called for non-file operations
 if [[ -z "$file_path" ]]; then
-    exit 0
+  exit 0
 fi
 
-if ! command -v jq &> /dev/null; then
-    echo "Error: jq is not installed. Please install it first." >&2
-    exit 1
+if ! command -v jq &>/dev/null; then
+  echo "Error: jq is not installed. Please install it first." >&2
+  exit 1
 fi
 
-if ! command -v uvx &> /dev/null; then
-    echo "Error: uvx is not installed. Please install uv first: https://docs.astral.sh/uv/getting-started/installation/" >&2
-    exit 1
+if ! command -v uvx &>/dev/null; then
+  echo "Error: uvx is not installed. Please install uv first: https://docs.astral.sh/uv/getting-started/installation/" >&2
+  exit 1
 fi
 
 if [[ "$file_path" =~ \.py$ ]]; then
-    echo "Formatting Python file: $file_path"
-    # Ignore unused imports (F401) since claude code tend to add the imports before implementing details.
-    # Don't exit on error - let Claude see the error output to fix the code
-    if ! (cd "$project_path" && uvx ruff format "$file_path" && uvx ruff check --ignore F401 --fix "$file_path"); then
-        echo "Warning: Formatting had issues for $file_path - check output above" >&2
-    fi
+  echo "Formatting Python file: $file_path"
+  # Ignore unused imports (F401) since claude code tend to add the imports before implementing details.
+  # Don't exit on error - let Claude see the error output to fix the code
+  if ! (cd "$project_path" && uvx ruff format "$file_path" && uvx ruff check --ignore F401 --fix "$file_path"); then
+    echo "Warning: Formatting had issues for $file_path - check output above" >&2
+  fi
 fi

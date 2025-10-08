@@ -4,7 +4,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_DIR="$HOME/.claude"
 
 # Check for jq dependency
-if ! command -v jq &> /dev/null; then
+if ! command -v jq &>/dev/null; then
   echo "Error: jq is required but not installed"
   echo "Install with: brew install jq (macOS) or apt install jq (Linux)"
   exit 1
@@ -62,7 +62,7 @@ if [ ! -f "$SETTINGS_FILE" ]; then
         }
       ]
     }
-  }' --arg command "$HOOK_COMMAND" > "$SETTINGS_FILE"
+  }' --arg command "$HOOK_COMMAND" >"$SETTINGS_FILE"
   echo "✓ Created settings.json with SessionStart hook"
 else
   # Backup existing settings.json
@@ -71,7 +71,7 @@ else
 
   # Check if hook already exists and append only if not present
   TEMP_FILE=$(mktemp)
-  trap "rm -f $TEMP_FILE" EXIT
+  trap 'rm -f "$TEMP_FILE"' EXIT
   jq --arg command "$HOOK_COMMAND" '
     .hooks.SessionStart = (.hooks.SessionStart // []) +
     if ([.hooks.SessionStart // [] | .[] | .hooks[]? | select(.command == $command)] | length > 0)
@@ -84,7 +84,7 @@ else
       }]
     }]
     end
-  ' "$SETTINGS_FILE" > "$TEMP_FILE"
+  ' "$SETTINGS_FILE" >"$TEMP_FILE"
   mv "$TEMP_FILE" "$SETTINGS_FILE"
 
   # Check if hook was added or already existed
@@ -125,7 +125,7 @@ fi
 echo ""
 echo "Context7 MCP provides up-to-date library documentation."
 echo "Get your API key at: https://context7.com/dashboard"
-read -p "Enter Context7 API key (or press Enter to skip): " CONTEXT7_API_KEY
+read -r -p "Enter Context7 API key (or press Enter to skip): " CONTEXT7_API_KEY
 
 if [ -n "$CONTEXT7_API_KEY" ]; then
   echo "Installing Context7 MCP server..."
