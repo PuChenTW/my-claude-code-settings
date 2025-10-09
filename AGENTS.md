@@ -1,22 +1,25 @@
-# Claude Code Settings Project
+# Claude & Codex Settings Project
 
 ## Project Goal
 
-Global configuration management for Claude Code that:
+Global configuration management for Claude Code and the Codex CLI that:
 1. Enforces Linus Torvalds-style coding principles (simplicity, performance, zero bloat)
 2. Installs and configures MCP servers (Playwright, Context7)
-3. Provides auto-formatting hooks for projects
-4. Maintains a SessionStart hook for date synchronization
+3. Provides auto-formatting hooks for projects (Currently only support Claude code)
+4. Maintains a SessionStart hook for date synchronization (Use crontab to update date for codex AGENTS.md)
 
 ## Architecture
 
 ```
 .
-├── PROMPT_TEMPLATE.md      # Template for ~/.claude/CLAUDE.md (user's global guidelines)
-├── setup.sh                # Main installer: copies template, installs MCP servers, sets up hooks
+├── PROMPT_TEMPLATE.md      # Template for ~/.claude/CLAUDE.md and ~/.codex/AGENTS.md
+├── setup.sh                # Wrapper installer: validates deps then calls client installers
+├── setup_claude.sh         # Claude installer: copies template, configures hook, installs MCP
+├── setup_codex.sh          # Codex installer: copies template, configures cron, installs MCP
 ├── setup-hooks.sh          # Per-project hook installer
-├── .claude/hooks/          # Hook scripts (format-python.sh, format-shellscript.sh)
-└── scripts/                # Utility scripts (update-date.sh for SessionStart)
+├── hooks/                  # Hook scripts (format-python.sh, format-shellscript.sh)
+├── update-claude-date.sh   # Keeps CLAUDE.md date current via SessionStart hook
+└── update-codex-date.sh    # Keeps AGENTS.md date current via cron
 ```
 
 ## Development Guidelines

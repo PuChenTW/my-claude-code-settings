@@ -1,8 +1,8 @@
-# Claude Code 設定
+# Claude 與 Codex 設定
 
 [English](README.md) | 繁體中文
 
-Claude Code 的全域配置，強制執行 Linus Torvalds 風格的程式設計原則：無情的簡潔、效能優先思維，以及零抽象膨脹。
+Claude Code 與 Codex CLI 的全域配置，強制執行 Linus Torvalds 風格的程式設計原則：無情的簡潔、效能優先思維，以及零抽象膨脹。
 
 ## 安裝
 
@@ -10,15 +10,23 @@ Claude Code 的全域配置，強制執行 Linus Torvalds 風格的程式設計�
 ./setup.sh
 ```
 
-這會將 `CLAUDE.md` 安裝到 `~/.claude/`、設定 SessionStart hook 來保持日期更新，並安裝 MCP 伺服器。
+請先確認 `jq`、`claude`、`codex` 都已在 `PATH`。這個總控腳本會驗證需求並呼叫兩個專屬安裝器：
+
+- `setup_claude.sh` 會更新 `~/.claude/`、重新設定 SessionStart hook、安裝 Claude 端的 MCP 伺服器
+- `setup_codex.sh` 會更新 `~/.codex/`、重新設定排程任務、安裝 Codex 端的 MCP 伺服器
+
+若只想設定其中一個客戶端，可直接執行對應的腳本。
 
 ## 功能
 
 - 複製程式設計指南到 `~/.claude/CLAUDE.md`
+- 將相同模板複製到 `~/.codex/AGENTS.md`（覆寫前會備份），並透過每日 crontab 自動更新日期
 - 設定 SessionStart hook 在每次對話開始時更新日期
 - 安裝 Playwright MCP 伺服器以進行網頁自動化
 - 選擇性安裝 Context7 MCP 伺服器以取得最新的函式庫文件（需要 API 金鑰）
 - 在所有專案中強制執行簡潔優先原則
+
+> 需要系統有 `crontab` 指令。如果缺少，腳本會顯示跳過訊息，請自行手動更新 `AGENTS.md` 的日期。
 
 ## 客製化
 

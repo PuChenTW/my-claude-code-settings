@@ -1,8 +1,8 @@
-# Claude Code Settings
+# Claude & Codex Settings
 
 English | [繁體中文](README.zh-TW.md)
 
-Global configuration for Claude Code that enforces Linus Torvalds-style coding principles: ruthless simplicity, performance-first thinking, and zero abstraction bloat.
+Global configuration for Claude Code and the Codex CLI that enforces Linus Torvalds-style coding principles: ruthless simplicity, performance-first thinking, and zero abstraction bloat.
 
 ## Setup
 
@@ -10,15 +10,23 @@ Global configuration for Claude Code that enforces Linus Torvalds-style coding p
 ./setup.sh
 ```
 
-This installs `CLAUDE.md` to `~/.claude/`, sets up a SessionStart hook to keep the date current, and installs MCP servers.
+Requires `jq`, `claude`, and `codex` on your `PATH`. The wrapper script validates those tools, then hands off to the dedicated installers:
+
+- `setup_claude.sh` updates `~/.claude/`, refreshes the SessionStart hook, and installs Claude MCP servers
+- `setup_codex.sh` updates `~/.codex/`, refreshes the cron job, and installs Codex MCP servers
+
+Run `setup_claude.sh` or `setup_codex.sh` directly if you only want to configure one client.
 
 ## What It Does
 
 - Copies coding guidelines to `~/.claude/CLAUDE.md`
+- Mirrors the same template into `~/.codex/AGENTS.md` for the Codex CLI and installs a daily cron job to refresh its date (backs up existing files before overwriting)
 - Configures SessionStart hook to update date on every session
 - Installs Playwright MCP server for web automation
 - Optionally installs Context7 MCP server for up-to-date library documentation (requires API key)
 - Enforces simplicity-first principles across all projects
+
+> Requires the `crontab` command. If it's missing, you'll see a skip message and should refresh `AGENTS.md` manually.
 
 ## Customization
 
