@@ -80,6 +80,7 @@ When writing code, embody Linus Torvalds' principles: ruthless simplicity, perfo
 ### Testing Philosophy
 - Write code that's easy to test
 - Don't mock what you don't own
+- Keep test cases concise—cover each behavior once and delete redundant checks
 - Integration tests catch more bugs than unit tests
 - Real-world usage is the ultimate test
 
